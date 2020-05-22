@@ -17,6 +17,7 @@ import Container from '@material-ui/core/Container';
 import { withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import {withRouter} from 'react-router-dom'
+import { ThemeContextConsumer } from "./theme";
 
 import { appointments } from './demo-data/appointments';
 
@@ -93,6 +94,8 @@ class Appointment extends React.PureComponent {
     const { classes } = this.props;
 
     return (
+      <ThemeContextConsumer>
+      {context => (
         <React.Fragment>
             <CssBaseline />
             <Container maxWidth="md" className={classes.root}>
@@ -139,6 +142,8 @@ class Appointment extends React.PureComponent {
                 </div>
             </Container>
         </React.Fragment>
+      )}
+      </ThemeContextConsumer>
     );
   }
 }
