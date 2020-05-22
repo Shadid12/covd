@@ -6,11 +6,11 @@ import {
   Scheduler,
   Appointments,
   AppointmentForm,
-  AppointmentTooltip,
   WeekView,
   EditRecurrenceMenu,
   AllDayPanel,
   ConfirmationDialog,
+  Resources
 } from '@devexpress/dx-react-scheduler-material-ui';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Container from '@material-ui/core/Container';
@@ -38,7 +38,7 @@ const styles = {
     }
 };
 
-class Appointment extends React.PureComponent {
+class AdminCal extends React.PureComponent {
   constructor(props) {
     super(props);
     this.state = {
@@ -48,6 +48,17 @@ class Appointment extends React.PureComponent {
       addedAppointment: {},
       appointmentChanges: {},
       editingAppointmentId: undefined,
+      resources: [
+        {
+          fieldName: 'status',
+          title: 'Status',
+          instances: [
+            { id: 'pending', text: 'pending', color: 'purple' },
+            { id: 'scheduled', text: 'scheduled', color: 'green' }
+          ],
+        }
+      ],
+      mainResourceName: 'status',
     };
 
     this.commitChanges = this.commitChanges.bind(this);
@@ -89,6 +100,7 @@ class Appointment extends React.PureComponent {
   render() {
     const {
       currentDate, data, addedAppointment, appointmentChanges, editingAppointmentId,
+      resources, mainResourceName
     } = this.state;
     const { classes } = this.props;
 
@@ -97,7 +109,7 @@ class Appointment extends React.PureComponent {
             <CssBaseline />
             <Container maxWidth="md" className={classes.root}>
             <Typography variant="h2" gutterBottom className={classes.header}>
-                Select Availability
+                Confirm Testing Schedule
             </Typography>
             <Paper >
                 <Scheduler
@@ -128,19 +140,21 @@ class Appointment extends React.PureComponent {
                 <ConfirmationDialog />
                 <Appointments />
                 <AppointmentForm />
+                <Resources
+                    data={resources}
+                    mainResourceName={mainResourceName}
+                />
                 </Scheduler>
             </Paper>
             <div className={classes.col}>
-                    <Button variant="contained" color="primary" onClick={() => {
-                        this.props.history.push('/done')
-                    }}>
-                        Finish
-                    </Button>
-                </div>
+                <Button variant="contained" color="primary" >
+                    Finish
+                </Button>
+            </div>
             </Container>
         </React.Fragment>
     );
   }
 }
 
-export default withStyles(styles)( withRouter(Appointment));
+export default withStyles(styles)( withRouter(AdminCal));

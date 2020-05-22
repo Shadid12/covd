@@ -1,6 +1,7 @@
 import React from 'react';
 import Home from './Home';
 import Done from './Done';
+import AdminCal from './AdminCal';
 import Apointment from './Apointment';
 import {
   BrowserRouter as Router,
@@ -18,6 +19,9 @@ function App() {
           </Route>
           <Route path="/done">
             <Done />
+          </Route>
+          <Route path="/admin-cal">
+            <AdminCal />
           </Route>
           <Route path="/">
             <Home />

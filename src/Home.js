@@ -9,6 +9,21 @@ import {withRouter} from 'react-router-dom'
 
 function Home(props) {
   const classes = useStyles();
+  const [state, setState] = React.useState({
+    name: '',
+    email: '',
+    hc: '',
+    age: '',
+    address: ''
+  })
+  
+  const handleInputChange = event => {
+    setState({
+      ...state,
+      [event.target.name]: event.target.value
+    });
+  }
+
   return (
     <React.Fragment>
       <CssBaseline />
@@ -22,18 +37,44 @@ function Home(props) {
               <form className={classes.formRoot} noValidate autoComplete="off">
                 <div className={classes.row}>
                   <div className={classes.col}>
-                    <TextField id="name" label="Name" variant="filled" />
+                    <TextField 
+                      id="name" 
+                      label="Name" 
+                      variant="filled"
+                      name="name"
+                      onChange={handleInputChange}
+                    />
                   </div>
                   <div className={classes.col}>
-                    <TextField id="age" label="Age" variant="filled" type="number"/>
+                    <TextField 
+                      id="email" 
+                      label="Email" 
+                      variant="filled" 
+                      type="text" 
+                      name="email"
+                      onChange={handleInputChange}
+                    />
                   </div>
                 </div>
                 <div className={classes.row}>
                   <div className={classes.col}>
-                    <TextField id="address" label="Address" variant="filled" />
+                    <TextField 
+                      id="address" 
+                      label="Address" 
+                      variant="filled"
+                      name="address"
+                      onChange={handleInputChange}
+                    />
                   </div>
                   <div className={classes.col}>
-                    <TextField id="HealthCard" label="Health Card #" variant="filled" />
+                    <TextField 
+                      id="age" 
+                      label="Age" 
+                      variant="filled" 
+                      type="number"
+                      name="age"
+                      onChange={handleInputChange}
+                    />
                   </div>
                 </div>
                 <div className={classes.row}>
@@ -43,6 +84,17 @@ function Home(props) {
                       label="Travel History" 
                       variant="filled" multiline 
                       rows={4}
+                      name="travel"
+                      onChange={handleInputChange}
+                    />
+                  </div>
+                  <div className={classes.col}>
+                    <TextField 
+                      id="HealthCard" 
+                      label="Health Card #" 
+                      variant="filled"
+                      name="hc"
+                      onChange={handleInputChange}
                     />
                   </div>
                 </div>
